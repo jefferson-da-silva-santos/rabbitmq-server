@@ -1,0 +1,17 @@
+{
+  "name": "rabbitmq_server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start:producer": "node producer.js",
+    "start:consumer": "node consumer.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jefferson Santos",
+  "license": "ISC",
+  "description": "Server RabbitMQ",
+  "dependencies": {
+    "amqplib": "^0.10.9"
+  }
+}
