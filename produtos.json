@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "nome": "Notebook Gamer",
+    "preco": 4500
+  },
+  {
+    "id": 2,
+    "nome": "Mouse RGB",
+    "preco": 150
+  },
+  {
+    "id": 3,
+    "nome": "Teclado Mecânico",
+    "preco": 350
+  }
+]
