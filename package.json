@@ -4,6 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start:eccomerce": "concurrently \"node __server.js\" \"node _email.js\" \"node _pagamento.js\" \"node _stock.js\" ",
     "start:producer": "node producer.js",
     "start:consumer": "node consumer.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,6 +14,7 @@
   "description": "Server RabbitMQ",
   "dependencies": {
     "amqplib": "^0.10.9",
+    "concurrently": "^9.2.1",
     "express": "^5.2.1"
   }
 }

@@ -8,14 +8,15 @@ app.use(express.json());
 
 const produtos = JSON.parse(fs.readFileSync('./produtos.json'));
 
-async function enviarParaFila(dados) {
+async function enviarParaExchange(dados) {
   const connection = await amqp.connect('amqp://admin:admin123@localhost:5672');
   const channel = await connection.createChannel();
-  const fila = 'pedidos';
+  const exchange = 'pedidos_exchange';
 
-  await channel.assertQueue(fila);
-  channel.sendToQueue(fila, Buffer.from(JSON.stringify(dados)));
-  console.log("Pedido enviado para fila de pedidos.");
+  await channel.assertExchange(exchange, 'fanout', { durable: false });
+
+  channel.publish(exchange, '', Buffer.from(JSON.stringify(dados)));
+  console.log("Pedido enviado para o exchange. ✅");
 }
 
 app.post('/pedido', async (req, res) => {
@@ -30,9 +31,13 @@ app.post('/pedido', async (req, res) => {
     email
   };
 
-  await enviarParaFila(pedido);
+  await enviarParaExchange(pedido);
 
   res.json({
-    
+    message: "Pedido recebido e em processamento"
   })
-})
+});
+
+app.listen(3000, () => {
+  console.log("Servidor rodando na porta 3000");
+});
